@@ -1,0 +1,48 @@
+@import '../../../../../scss/shared';
+
+.container {
+  width: 100%;
+  max-width: 100%;
+
+  .row {
+    overflow-y: auto;
+  }
+}
+
+img {
+  border-radius: 50%;
+}
+
+.cww {
+  margin: 0 auto;
+}
+
+@media (max-width: 1175px) {
+  .cww {
+    margin: 10px;
+
+    img {
+      height: 120px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .cww {
+    margin: 10px 0;
+    flex: 0 0 32%;
+    max-width: 32%;
+  }
+  
+  .container {
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cww {
+    img {
+      height: 90px;
+    }
+  }
+}

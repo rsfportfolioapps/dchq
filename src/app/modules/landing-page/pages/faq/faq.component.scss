@@ -1,0 +1,30 @@
+@import '../homepage/homepage.component.scss';
+@import '~bootstrap/scss/bootstrap-grid';
+
+.container__center {
+  @include media-breakpoint-up(md) {
+    width: 75%;
+  }
+  background-color: $bg-white;
+}
+
+.container__margins {
+  @include media-breakpoint-down(md) {
+    margin: 20px 10px;
+  }
+}
+
+.container__top-margin {
+  max-width: 100%;
+  margin-top: 83px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.card {
+  .card-body {
+    .card-title {
+      color: $color-pink;
+    }
+  }
+}

@@ -1,0 +1,67 @@
+<app-top-nav></app-top-nav>
+
+<div class="container">
+  <div class="row cp-header m-0">
+    <div class="col col-5 cp__text">
+      <ng-container *ngTemplateOutlet="headerText;"></ng-container>
+    </div>
+    <div class="col-12 col-md-7 cp__img">
+      <ng-container *ngTemplateOutlet="headerText;"></ng-container>
+    </div>
+  </div>
+
+  <div class="row m-0">
+    <div class="swu">
+      <h1>It's easy to sign up</h1>
+      <p>We want to understand your needs, so speak with us to create a package which suits you and your employees. We can start onboarding immediately and your employees could be calling our medical team in 48 hours.</p>
+      <button type="button" [appExternalUrl]="environment.url.SpeakWithUs" class="btn btn-primary">Speak with us</button>
+    </div>
+  </div>
+
+  <div class="row pkg m-0">
+    <div class="col-12">
+      <h1 class="pkg__title">DocHQ Packages</h1>
+    </div>
+    <div class="row">
+      <div *ngFor="let package of packages" class="card p-0">
+        <div class="card-header">
+          <h4 class="">{{ package.title }}</h4>
+          <h1><span class="c-sign">£</span>{{ package.curValue }}<span class="m-abbr">/mo</span> <i class="fas fa-caret-down"></i></h1>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4 text-left">
+            <li *ngFor="let item of package.checkList"><i class="fas fa-check mr-1" [ngClass]="item.check ? 'fa-check color-red': 'fa-times'"></i> <span [ngClass]="{'line-through': !item.check}">{{ item.text }} </span> </li>
+          </ul>
+        </div>
+        <div class="row mb-4">
+          <button type="button" [appExternalUrl]="package.url" class="btn {{ package.btnClass }}">{{ package.btnText }}</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 f2fc-text">*Face-to-face consultations can be acquired for £40 a session</div>
+  </div>
+
+  <div class="row cs">
+    <div class="col-12">
+      <h1 id="roi-calc" class="cs__title">How much could you save?</h1>
+      <p class="cs__desc">Every company is different, so use this calculator to understand exactly how much money you could save with DocHQ.</p>
+    </div>
+
+    <app-roi-calculator class="cs-calculator col-md-10"></app-roi-calculator>
+  </div>
+
+  <div class="quote-from-container">
+    <app-quote-from></app-quote-from>
+  </div>
+
+  <div class="footer-container">
+    <app-footer></app-footer>
+  </div>
+
+  <ng-template #headerText>
+    <div class="cp__img-text">
+      <h1>Choose a <br/> plan<i class="fas fa-circle html-period"></i></h1>
+      <p>We have a range of packages to suit your business. Whether your employees are office based, on the shop floor
+        or out in the field, we take care of their health.</p>
+    </div>
+  </ng-template>

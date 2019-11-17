@@ -1,0 +1,33 @@
+@mixin btn {
+  height: 50px;
+  border: none;
+  font-size: 16px;
+
+}
+
+@mixin btn-primary {
+  @include btn;
+
+  background: $bg-primary;
+  color: $color-white;
+  border: thin $color-primary solid;
+  border-radius: 30px;
+}
+
+@mixin btn-black {
+  @include btn;
+
+  background: $bg-black;
+  color: $color-white;
+  border: thin $color-black solid;
+  border-radius: 30px;
+}
+
+@mixin btn-red {
+  @include btn;
+
+  background: $bg-red;
+  color: $color-white;
+  border: thin $color-red solid;
+  border-radius: 30px;
+}

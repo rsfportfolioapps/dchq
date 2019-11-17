@@ -1,0 +1,74 @@
+@import '../../../../../scss/shared';
+
+.container {
+  width: 100%;
+  max-width: 100%;
+}
+
+.wwa-row {
+  text-align: center;
+  height: 250px;
+
+  h4 {
+    margin-top: 8px;
+    font-weight: 600;
+  }
+
+  img {
+    height: 140px;
+    width: 140px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .wwa-row {
+    h4 {
+      font-size: 23px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .wwa-row {
+    height: 150px;
+
+    img {
+      height: 70px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-size: 12px;
+    }
+
+    h4 {
+      font-size: 18px;
+      margin-top: 0;
+      font-weight: 600;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .wwa-row {
+    height: 160px;
+
+    h1.wwa-title {
+      padding-top: 20px;
+    }
+
+    h4 {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    svg {
+      height: 90px;
+      width: 90px;
+    }
+  }
+}

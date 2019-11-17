@@ -1,0 +1,107 @@
+@import '../../../../../scss/shared';
+
+.container {
+  width: 100%;
+  max-width: 100%;
+}
+
+.qf-row {
+  .fa-quote-left {
+    color: $bg-red;
+    font-size: 24px;
+  }
+
+  .col-lg-9 {
+    padding: 40px;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+    font-style: italic;
+    font-weight: 100;
+  }
+
+  img {
+    border-radius: 50%;
+  }
+
+  h5 {
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 1175px) {
+  .qf-row {
+    .col-lg-9 {
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 32px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .qf-row {
+    .col-lg-9 {
+      padding: 0 10px 10px 20px;
+    }
+
+    .fa-quote-left {
+      font-size: 14px;
+    }
+
+    h1 {
+      font-size: 20px;
+    }
+
+    h5 {
+      font-size: 14px;
+    }
+  }
+
+  .container {
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .qf-row {
+    h1 {
+      font-size: 18px;
+    }
+  
+    h5 {
+      font-size: 12px;
+    }
+
+    img {
+      margin-top: 20px;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .qf-row {
+    h1 {
+      margin-bottom: 7px;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .qf-row {
+    .fa-quote-left {
+      font-size: 14px;
+    }
+
+    h1 {
+      font-size: 16px;
+    }
+
+    h5 {
+      font-size: 11px;
+    }
+  }
+}

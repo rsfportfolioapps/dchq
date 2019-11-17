@@ -1,0 +1,177 @@
+<div class="container">
+  <form class="row rc px-md-0 px-lg-4" [formGroup]="calcForm">
+    <div class="rc__left-panel col-md-5">
+      <div class="col-12">
+        <div class="field" [ngClass]="{'field--error': roiCalculated && !calcForm.get('selectedIndustry').value}">
+          <select required class="col-12" name="industry" formControlName="selectedIndustry">
+            <option [ngValue]="null" hidden selected disabled="">Select your industry</option>
+            <option *ngFor="let i of industries" [ngValue]="i">{{i.label}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="field" [ngClass]="{'field--error': (roiCalculated && !employeeCount) || (calcForm.get('employeeCount').dirty && calcForm.get('employeeCount').errors)}">
+          <div class="field__label">Enter number of employees</div>
+          <input type="number" min="0" class="field__input d-none" formControlName="employeeCount" name="employeeCount" (blur)="hideInput($event)">
+          <div class="field__input" (click)="showInput($event)">{{calcForm.get('employeeCount').value ? calcForm.get('employeeCount').value : 'e.g. 1000'}}</div>
+        </div>
+        <div class="error-message" *ngIf="calcForm.get('employeeCount').errors?.min">
+          Minimum allowed number is 0.
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="field--nobg">
+          <div class="field__label flex-column">Do you provide full sick leave?</div>
+          <div class="field__input radio">
+            <input type="radio" name="paidSickLeave" value="1" formControlName="paidSickLeave">
+            <label>Yes</label>
+            <input type="radio" name="paidSickLeave" value="0" formControlName="paidSickLeave">
+            <label>No</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 d-flex my-4">
+        <div class="info" data-title="You can see your industry average per year. Please modify the fields to suit your company.">
+          <i class="fas fa-info-circle"></i>
+        </div>
+        <span class="d-flex cursor--pointer noselect" (click)="showAdvancedOptions()">
+          <div class="px-2">Advanced options</div>
+          <i class="fas fa-caret-down"></i>
+        </span>
+      </div>
+      <div class="ao col-12 noselect" *ngIf="isShownAdvancedOptions" formGroupName="industry">
+        <div class="field" [ngClass]="{'field--error':calcForm.get('industry').controls.sickLeaves.errors}">
+          <div class="field__label">Average sick leave per person (per year)</div>
+          <input type="number" min="0" max="365" class="field__input d-none" formControlName="sickLeaves" name="sickLeaves" (blur)="hideInput($event)">
+          <div class="field__input" (click)="showInput($event)" [ngClass]="{'invisible': !calcForm.get('selectedIndustry').value}">{{calcForm.get('industry').value.sickLeaves}} days</div>
+        </div>
+        <div class="error-message" *ngIf="calcForm.get('industry').controls.sickLeaves.errors?.min">
+          Minimum allowed number is 0.
+        </div>
+        <div class="error-message" *ngIf="calcForm.get('industry').controls.sickLeaves.errors?.max">
+          Maximum allowed number is 365.
+        </div>
+        <div class="field" [ngClass]="{'field--error':calcForm.get('industry').controls.aveSalary.errors}">
+          <div class="field__label">Average salary</div>
+          <input type="number" min="0" class="field__input d-none" formControlName="aveSalary" name="aveSalary" (blur)="hideInput($event)">
+          <div class="field__input" (click)="showInput($event)">{{calcForm.get('industry').value.aveSalary | currency:'GBP'}}</div>
+        </div>
+        <div class="error-message" *ngIf="calcForm.get('industry').controls.aveSalary.errors?.min">
+          Minimum allowed number is 0.
+        </div>
+        <div class="field" [ngClass]="{'field--error':calcForm.get('industry').controls.workingDays.errors}">
+          <div class="field__label">Working days per year</div>
+          <input type="number" min="0" max="365" class="field__input d-none" formControlName="workingDays" name="workingDays" (blur)="hideInput($event)">
+          <div class="field__input" (click)="showInput($event)" [ngClass]="{'invisible': !calcForm.get('selectedIndustry').value}">{{calcForm.get('industry').value.workingDays}} days</div>
+        </div>
+        <div class="error-message" *ngIf="calcForm.get('industry').controls.workingDays.errors?.min">
+          Minimum allowed number is 0.
+        </div>
+        <div class="error-message" *ngIf="calcForm.get('industry').controls.workingDays.errors?.max">
+          Maximum allowed number is 365.
+        </div>
+        <div class="field" [ngClass]="{'field--error':calcForm.get('industry').controls.attrition.errors}">
+          <div class="field__label">Annual attrition rate</div>
+          <input type="number" min="0" max="100" class="field__input d-none" placeholder="15%" formControlName="attrition" name="attrition" (blur)="hideInput($event)">
+          <div class="field__input" (click)="showInput($event)">{{calcForm.get('industry').value.attrition | percent}}</div>
+        </div>
+        <div class="error-message" *ngIf="calcForm.get('industry').controls.attrition.errors?.min">
+          Minimum allowed number is 0.
+        </div>
+        <div class="error-message" *ngIf="calcForm.get('industry').controls.attrition.errors?.max">
+          Maximum allowed number is 100.
+        </div>
+      </div>
+      <div class="button-container col-12 my-5">
+        <div class="btn btn--pink" (click)="calculate()">Calculate savings</div>
+      </div>
+    </div>
+
+    <div class="rc__right-panel col-md-7">
+      <div class="placeholder col-8 m-auto" *ngIf="!roiCalculated || !isFormValid">
+        <div class="placeholder__image col-8"></div>
+        <div class="placeholder__text col-12">Click calculate savings to see your ROI data</div>
+      </div>
+      <div class="col-12 p-0 p-md-auto" *ngIf="roiCalculated && isFormValid">
+        <div class="col-12">
+          <div class="field--nobg">
+            <div class="field__label">
+              <div class="info" data-title="Salary costs: annual salary, employer’s National Insurance contribution, employer’s contribution to pension, bonus payments, contracted overtime. Benefits: car allowances, private healthcare, disability cover, any other benefits. ">
+                <i class="fas fa-info-circle"></i>
+              </div>
+              <span class="result-label">Cost to company</span>
+            </div>
+            <div class="field__input">{{directCost | currency:'GBP' : 'symbol' : '1.0'}}</div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="field--nobg">
+            <div class="field__label">
+              <div class="info" data-title="Internal replacement worker: overtime, ‘acting up’ allowance. External replacement worker: daily agency costs. ">
+                <i class="fas fa-info-circle"></i>
+              </div>
+              <span class="result-label">Indirect cost to company</span>
+            </div>
+            <div class="field__input">{{indirectCost | currency:'GBP' : 'symbol' : '1.0'}}</div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="field--nobg">
+            <div class="field__label">
+              <div class="info" data-title="Different industries have different employee retention rates and associated costs. Our data is taken from Linkedin (2018) research of half a billion LinkedIn members.">
+                <i class="fas fa-info-circle"></i>
+              </div>
+              <span class="result-label">Retention</span>
+            </div>
+            <div class="field__input">{{retentionCost | currency:'GBP' : 'symbol' : '1.0'}}</div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="field--nobg">
+            <div class="field__label">
+              <div class="info" data-title="This number is your direct, indirect and retention costs combined.">
+                <i class="fas fa-info-circle"></i>
+              </div>
+              <span class="result-label">Annual cost</span>
+            </div>
+            <div class="field__input text--big">{{annualCost | currency:'GBP' : 'symbol' : '1.0'}}</div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around my-3 mt-5">
+          <div class="col-8 field">
+            <div class="field__label">Annual cost of Back To Work Lite</div>
+            <div class="field__input">{{bwLite | currency:'GBP' : 'symbol' : '1.0'}}</div>
+          </div>
+          <div class="d-flex flex-column pt-3 pt-lg-1">
+            <div>Total Savings</div>
+            <div class="text--big text--lighter-green">{{bwLiteSavings | currency:'GBP' : 'symbol' : '1.0'}}</div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around my-3">
+          <div class="col-8 field">
+            <div class="field__label">Annual cost of Back To Work</div>
+            <div class="field__input">{{bw | currency:'GBP' : 'symbol' : '1.0'}}</div>
+          </div>
+          <div class="d-flex flex-column pt-3 pt-lg-1">
+            <div>Total Savings</div>
+            <div class="text--big text--lighter-green">{{bwSavings | currency:'GBP' : 'symbol' : '1.0'}}</div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around my-3">
+          <div class="col-8 field">
+            <div class="field__label">Annual cost of DocHQ Wellness</div>
+            <div class="field__input">{{bwPremium | currency:'GBP' : 'symbol' : '1.0'}}</div>
+          </div>
+          <div class="d-flex flex-column pt-3 pt-lg-1">
+            <div>Total Savings</div>
+            <div class="text--big text--lighter-green">{{bwPremiumSavings | currency:'GBP' : 'symbol' : '1.0'}}</div>
+          </div>
+        </div>
+        <div class="button-container col-12 mt-5">
+          <div class="btn btn--green my-2 mx-md-3" (click)="exportAsXLSX()">Download detailed report</div>
+          <a href="mailto:?subject=See how much we can save with DocHQ&body=Hi,%0D%0A%0D%0ADocHQ is an employee healthcare benefit provider.%0D%0ACheck out their price plans and ROI calculator to see what they can do for us.%0D%0Ahttps://dochq.co.uk/packages#roi-calc"><div class="btn btn--green my-2 mx-md-3">Share with a colleague</div></a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

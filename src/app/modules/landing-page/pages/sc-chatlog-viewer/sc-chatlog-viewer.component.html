@@ -1,0 +1,77 @@
+<app-top-nav></app-top-nav>
+
+<div class="header-container">
+  <div class="row tagline-header-container m-0">
+    <div class="col col-5 tagline-text">
+      <div class="tagline-img-text">
+        <h1>SC Chatlog Viewer</h1>
+      </div>
+    </div>
+    <div class="col-12 col-md-7 tagline-img">
+      <div class="tagline-img-text">
+        <h1>SC Chatlog Viewer</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col col-12" *ngIf="showSessions">
+      <form>
+        <div class="form-group">
+          <label for="session">Sessions</label>
+          <select (change)="onChange($event.target.value)" class="form-control" id="session">
+            <option>Please select session...</option>
+            <option *ngFor="let session of scSessions.data" [value]="session.interview_id">{{ session.interview_id }} - ({{ session.updatedAt }})</option>
+          </select>
+        </div>
+      </form>
+    </div> 
+  </div>
+  <div class="row">
+    <div class="col col-8" *ngIf="showSessionTable">
+      <table class="table">
+        <thead>
+          <th scope="col">Type</th>
+          <th scope="col">Message</th>
+          <th scope="col">Origin</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let message of scChatLog.data">
+            <td>{{ message.type }}</td>
+            <td>{{ parseJSON(message.type, message.message) }}</td>
+            <td>{{ message.origin }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col col-4" *ngIf="showSessionDiagnosis">
+      <h2>{{scChatLogDiagnosis.data.name }}, {{scChatLogDiagnosis.data.age}}, {{scChatLogDiagnosis.data.sex}}</h2>
+      <h3>Listed conditions</h3>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let condition of scChatLogDiagnosis.data.data.conditions">{{ condition.name}} - {{ condition.probability }}</li>
+      </ul>
+
+      <h3>Conflicting evidence</h3>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let condition of scChatLogDiagnosis.data.evidence.conflicting_evidence">{{ condition.name}}</li>
+      </ul>
+      <h3>Supporting evidence</h3>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let condition of scChatLogDiagnosis.data.evidence.supporting_evidence">{{ condition.name}}</li>
+      </ul>
+      <h3>Unconfirmed evidence</h3>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let condition of scChatLogDiagnosis.data.evidence.unconfirmed_evidence">{{ condition.name}}</li>
+      </ul>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="footer-container">
+  <app-footer></app-footer>
+</div>

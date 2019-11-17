@@ -1,0 +1,54 @@
+<app-top-nav></app-top-nav>
+
+<div class="container">
+  <div class="row tagline-header m-0">
+    <div class="col col-5 tagline-header__text">
+      <ng-container *ngTemplateOutlet="headerText;"></ng-container>
+    </div>
+    <div class="col-12 col-md-7 tagline-header__img">
+      <ng-container *ngTemplateOutlet="headerText;"></ng-container>
+    </div>
+  </div>
+</div>
+
+<div class="wwa">
+  <h1 class="wwa__title">What we do</h1>
+  <p class="wwa__desc">DocHQ works with your local NHS doctors surgey to give your employees private healthcare. Your
+    employees get instant access to GPs, nurses and medications, so they are back to normal, faster.</p>
+  <app-who-we-are></app-who-we-are>
+</div>
+
+<div class="benefits">
+  <div class="row m-0 p-0">
+    <div class="col-12 col-md-5 col-lg-4">
+      <h1 class="benefits__title">We benefit you and your team<span class="cbg-red">.</span></h1>
+      <button type="button" [appExternalUrl]="environment.url.SpeakWithUs" class="btn btn-swu">Speak with us</button>
+    </div>
+    <div class="col-12 col-md-7 col-lg-8">
+      <app-benefits></app-benefits>
+    </div>
+  </div>
+</div>
+
+<div class="jumbotron-container">
+  <app-jumbotron></app-jumbotron>
+</div>
+
+<div class="eco-benefits">
+  <app-eco-benefit></app-eco-benefit>
+</div>
+
+<div class="quote-from-container">
+  <app-quote-from></app-quote-from>
+</div>
+
+<div class="footer-container">
+  <app-footer></app-footer>
+</div>
+
+<ng-template #headerText>
+  <div class="tagline-header__img-text">
+    <h1>GP services for a stronger workforce <i class="fas fa-circle html-period"></i></h1>
+    <p>We partner with local general practices to give your employees easy access to a medical team when they need it</p>
+  </div>
+</ng-template>

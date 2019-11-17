@@ -1,0 +1,39 @@
+# Default values for chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+image:
+  repository: gitlab.dochq.co.uk.com/group/project
+  tag: latest
+  pullPolicy: Always
+  secrets:
+    - name: gitlab-registry
+application:
+  track: stable
+  tier: web
+service:
+  enabled: true
+  type: ClusterIP
+  url: http://dochq.local/
+  externalPort: 80
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
+postgresql:
+  enabled: true
+resources:
+# 
+#   limits:
+#     cpu: 100m
+#     memory: 512Mi
+#   requests:
+#     cpu: 100m
+#     memory: 512Mi
+ingress:
+  path: /
+development:
+  dev : false
+  hostdir: ""
+cronJobs:

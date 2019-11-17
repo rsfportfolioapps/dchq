@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let thumbnail of thumbnails" class="col-6 col-md-4 col-lg-3 wwa-row" >
+      <img [src]="thumbnail.image" />
+      <h4>{{ thumbnail.title }}</h4>
+      <p>{{ thumbnail.description }}</p>
+    </div>
+  </div>
+</div>

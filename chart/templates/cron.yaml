@@ -1,0 +1,36 @@
+{{- range .Values.cronJobs }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ template "trackableappname" $ }}-{{ .name | lower }}
+  labels:
+    app: {{ template "appname" $ }}
+    track: "{{ $.Values.application.track }}"
+    tier: "{{ $.Values.application.tier }}"
+    chart: "{{ $.Chart.Name }}-{{ $.Chart.Version | replace "+" "_" }}"
+    release: {{ $.Release.Name }}
+    heritage: {{ $.Release.Service }}
+spec:
+  schedule: "{{ .time }}"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: {{ $.Chart.Name}}-{{ .name | lower}}
+            image: tutum/curl
+            env:
+              - name: HOST
+                value: {{ template "fullname" $ }}
+              - name: TOKEN
+                valueFrom:
+                  configMapKeyRef:
+                    name: {{ template "trackableappname" $ }}-cron
+                    key: token
+            command: ["/bin/bash"]
+            args:
+              - '-c'
+              - '/usr/bin/curl http://$HOST/api/crons/{{ .name }} -k -H "Authorization: Bearer $TOKEN"'
+          restartPolicy: Never
+---
+{{- end}}

@@ -1,0 +1,235 @@
+@import '../../../../../scss/shared';
+
+.container {
+  max-width: 100%;
+}
+
+.rc {
+  background-color: $bg-black;
+  color: $color-white;
+  border-radius: 8px;
+  padding: 30px;
+  font-size: 14px;
+  min-height: 600px;
+
+  .rc__left-panel {
+    border-right: thin $color-white solid;
+  }
+
+  .rc__right-panel {
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+  }
+}
+
+.field {
+  display: flex;
+  justify-content: space-between;
+  background-color: $color-white;
+  padding: 5px 10px 5px 0;
+  margin: 15px 0;
+  color: $color-black;
+
+  .field__label {
+    align-items: flex-start;
+    padding-left: 10px;
+  }
+
+  .field__input {
+    align-items: flex-end;
+    text-align: right;
+    color: $color-black;
+  }
+
+  input.field__input {
+    max-width: 80px;
+  }
+
+  &--nobg{
+    background-color: unset;
+    display: flex;
+    justify-content: space-between;
+
+    .field__label {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin: 5px 0;
+    }
+
+    .field__input {
+      min-width: 90px;
+    }
+  }
+}
+
+.field--error {
+  border: 2px solid $color-red;
+}
+
+.error-message {
+  color: $color-lighter-pink;
+  font-size: 13px;
+}
+
+.placeholder {
+  .placeholder__image {
+    background-image: url(../../../../../assets/svg/noun_Calculator_1524989.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 250px;
+    width: 100%;
+    margin: auto;
+  }
+
+  .placeholder__text {
+    font-size: 20px;
+    margin: auto;
+    text-align: center;
+  }
+}
+
+.result-label {
+  position: absolute;
+  left: 60px;
+}
+
+.text {
+  &--big {
+    font-size: 22px;
+  }
+
+  &--lighter-green {
+    color: $color-lighter-green;
+  }
+}
+
+input,
+select,
+::placeholder {
+  border: none;
+  color: $color-black;
+  padding: 0 5px;
+}
+
+select {
+  background: url("data:image/svg+xml;utf8,<svg fill='#E5014D' height='35' viewBox='0 0 23 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M0 6l8 10 10-10z'/></svg>") no-repeat right;
+    -webkit-appearance: none;
+    padding: 0 23px 0 10px;
+
+    &::-webkit-scrollbar-thumb {
+      -webkit-overflow-scrolling: touch;
+  }
+}
+
+.radio {
+  input[type="radio"] {
+    opacity: 0;
+      position: relative;
+      left: 50px;
+      top: 5px;
+      height: 25px;
+      width: 25px;
+
+    &+label::after {
+      content: "\f0c8";
+      font-family: "Font Awesome 5 Free";
+      margin-left: 8px;
+      font-size: 1.5em;
+      font-weight: 900;
+    }
+
+    &:checked+label::after {
+      content: "\f14a";
+    }
+  }
+}
+
+[data-title] {
+  position: relative;
+}
+
+[data-title]:hover:before {
+  background: $bg-pink;
+  top: 100%;
+  background: $bg-pink;
+  border-radius: 2px;
+  color: $color-white;
+  content: attr(data-title);
+  padding: 5px 15px;
+  position: absolute;
+  z-index: 98;
+  width: 200px;
+  margin-top: 10px;
+  left: -200%;
+}
+
+[data-title]:hover:after {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 10px solid $bg-pink;
+  content: ' ';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+}
+
+i {
+  font-size: 1.5em;
+}
+
+.btn {
+  padding: 3px 15px;
+  border-radius: 18px;
+  color: $color-white;
+  font-size: 14px;
+  cursor: pointer;
+
+  &--pink {
+    background: $bg-pink;
+  }
+
+  &--green {
+    background: $bg-green;
+  }
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.cursor--pointer {
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .rc {
+    padding: 30px 0;
+    .rc__left-panel {
+      border: none;
+    }
+  }
+
+  .field {
+    &--nobg {
+      .field__label {
+        max-width: 140px;
+      }
+    }
+  }
+
+  .placeholder {
+    .placeholder__image {
+      background-position: bottom;
+    }
+  }
+}

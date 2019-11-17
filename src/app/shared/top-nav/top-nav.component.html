@@ -1,0 +1,13 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom fixed-top">
+  <h5 routerLink="/" class="my-0 mr-md-auto font-weight-normal">
+    <img src="/assets/icons/icon-72x72.png" />
+    <span>DocHQ</span>
+  </h5>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a href="javascript:void(0)" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="nav-item" routerLink="/how-dochq-works" >How DocHQ works</a>
+    <a href="javascript:void(0)" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="nav-item" routerLink="/packages">Packages</a>
+    <a href="javascript:void(0)" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="nav-item" routerLink="/faqs">FAQs</a>
+    <a href="javascript:void(0)" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="nav-item" routerLink="/contact">Contact</a>
+  </nav>
+  <a class="btn btn-swu" [appExternalUrl]="environment.url.SpeakWithUs" href="javascript:void(0)">Speak with us</a>
+</div>

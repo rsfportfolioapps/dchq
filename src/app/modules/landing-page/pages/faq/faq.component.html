@@ -1,0 +1,33 @@
+<app-top-nav></app-top-nav>
+
+<div class="container container__top-margin">
+  <div class="row tagline-header-container m-0">
+    <div class="col col-12 tagline-text">
+      <div class="tagline-img-text">
+        <h1>Frequently Asked Questions (FAQs)</h1>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container container__center container__margins">
+  <div clas="row">
+    <div class="col-12">
+      <!-- CARD START -->
+      <div class="card-columns">
+        <div class="card" *ngFor="let faq of faqs">
+          <div class="card-body">
+            <h5 class="card-title">{{ faq.question}}</h5>
+            <p class="card-text">{{ faq.answer }}</p>
+          </div>
+        </div>
+      </div>
+      <!-- CARD END -->
+    </div>
+  </div><!-- .row-->
+</div>
+
+<div class="footer-container">
+  <app-footer></app-footer>
+</div>

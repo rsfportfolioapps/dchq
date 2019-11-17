@@ -1,0 +1,61 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "trackableappname" . }}
+  labels:
+    app: {{ template "appname" . }}
+    track: "{{ .Values.application.track }}"
+    tier: "{{ .Values.application.tier }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "appname" . }}
+        track: "{{ .Values.application.track }}"
+        tier: "{{ .Values.application.tier }}"
+        release: {{ .Release.Name }}
+    spec:
+{{if eq .Values.development.dev false}}
+      imagePullSecrets:
+{{ toYaml .Values.image.secrets | indent 10 }}
+{{ end }}
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.image.repository}}:{{ .Values.image.tag}}
+        imagePullPolicy: {{ if eq .Values.development.dev false }}{{ .Values.image.pullPolicy }}{{- else}}Never{{- end}}
+        env:
+        - name: ENVIROMENT
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "trackableappname" . }}-env-config
+              key: ENV
+        ports:
+        {{- range .Values.service.ports }}
+        - name: {{ .name }}
+          containerPort: {{ .port }}
+        {{- end }}
+        volumeMounts:
+          - name: {{ .Release.Name }}-config
+            mountPath: /etc/nginx/conf.d/default.conf
+            subPath: nginx.conf
+        {{if .Values.development.hostdir}}
+          - name: host-path
+            mountPath: /usr/src/app
+        {{ end }}
+        resources:
+{{ toYaml .Values.resources | indent 12 }}
+      volumes:
+        - name: {{ .Release.Name }}-config
+          configMap:
+            name: {{ .Release.Name }}-config
+{{if .Values.development.hostdir}}
+        - name: host-path
+          hostPath:
+            path: {{ .Values.development.hostdir }}
+            type: Directory
+{{ end }}
+

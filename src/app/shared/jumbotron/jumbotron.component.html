@@ -1,0 +1,69 @@
+<div id="c-indicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#c-indicators1" data-slide-to="0" class="active"></li>
+    <li data-target="#c-indicators2" data-slide-to="1"></li>
+    <li data-target="#c-indicators3" data-slide-to="2"></li>
+    <li data-target="#c-indicators4" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div *ngFor="let info of jumbotronInfo; let i = index" class="carousel-item {{ i === 0 ? 'active' : '' }}">
+      <h1>{{ info.title }}</h1>
+      <div class="row">
+        <div class="col-3 col-md-3 col-lg-2 text-center">
+          <img class="rounded-circle carousel-img" [src]="info.image" />
+        </div>
+        <div class="col col-md-8 col-lg-9">
+          <h3 class="carousel-text">{{ info.description }}</h3>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="carousel-item">
+      <h1>Barbara's Story</h1>
+      <div class="row">
+        <div class="col-3 col-md-3 col-lg-2 text-center">
+          <img class="rounded-circle carousel-img" src="/assets/temp/images/barbara.png" />
+        </div>
+        <div class="col col-md-8 col-lg-9">
+          <h3 class="carousel-text">Barbara is the best customer service rep in the team. She truly cares about her job, and it upset her to take
+            an afternoon off once a year to see a doctor about her contraceptive pill. Now, with DocHQ, she receives a
+            reminder about her prescription and is booked in for a quick 10 minute appointment. No waiting time, no
+            travel time, and she is back at her desk in half an hour. 
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <h1>Roman's Story</h1>
+      <div class="row">
+        <div class="col-3 col-md-3 col-lg-2 text-center">
+          <img class="rounded-circle carousel-img" src="/assets/temp/images/roman.png" />
+        </div>
+        <div class="col col-md-8 col-lg-9">
+          <h3 class="carousel-text">Roman works on the manufacturing line. He’s amazing with his hands, but his hayfever slows him down
+            every summer. With DocHQ, he receives a reminder about his allergies in spring and gets a prescription in
+            time to beat the high pollen counts. Finally, he’s able to enjoy the sun as much as he enjoys his work.
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <h1>Sabilah's Story</h1>
+      <div class="row">
+        <div class="col-3 col-md-3 col-lg-2 text-center">
+          <img class="rounded-circle carousel-img" src="/assets/temp/images/sabilah.png" />
+        </div>
+        <div class="col col-md-8 col-lg-9">
+          <h3 class="carousel-text">Sabilah developed a nasty rash on her arm a year ago, and didn’t have the time to go to her GP. But her
+            company signed up to DocHQ last week. She finds it easy to contact a local nurse and shows the medical
+            team her problem. The nurse easily diagnoses the condition and sent a prescription to her local pharmacy
+            in under 24 hours. The problem clears up in no time.
+          </h3>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <a class="carousel-control-next" href="#c-indicators" role="button" data-slide="next">
+    <i class="fas fa-chevron-right fa-4x"></i>
+    <span class="sr-only">Next</span>
+  </a>
+</div>

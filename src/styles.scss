@@ -1,0 +1,48 @@
+/*
+ * SCSS organised under ITCSS rules
+ * Please ensure this is maintained
+ * https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
+ *
+ * CSS elements are to be named undert BEM ruling
+ * http://getbem.com/naming/
+ */
+
+//settings
+// @import "scss/settings/scss-vars";
+// @import "scss/settings/font";
+// Elements dir
+// @import "scss/elements/body";
+
+@import './scss/shared';
+
+body {
+  background: $bg-white;
+  font-family: $family-font;
+  min-width: 320px;
+  max-width: 100%;
+  width: 100vw;
+  margin: 0;
+  color: $color-black;
+}
+
+*:focus {
+  outline: none;
+}
+
+i.html-period {
+  font-size: 10px;
+  color: $color-pink;
+  margin-left: 2px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.cbg-red {
+  color: $color-red;
+}
+
+.br-50 {
+  border-radius: 50%;
+}

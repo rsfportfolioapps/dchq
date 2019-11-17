@@ -1,0 +1,133 @@
+<app-top-nav></app-top-nav>
+
+<div class="container">
+  <div class="row hdw-header m-0">
+    <div class="col col-5 hdw-header__text">
+      <ng-container *ngTemplateOutlet="headerText;"></ng-container>
+    </div>
+    <div class="col-12 col-md-7 hdw-header__img">
+      <ng-container *ngTemplateOutlet="headerText;"></ng-container>
+    </div>
+  </div>
+
+  <div class="shwd">
+    <div class="col-12 shwd__text">
+      <h1>Staying healthy with DocHQ</h1>
+      <p>As part of onboarding, we create a personalised health profile with each of your employees. This helps us keep track of their daily health. If a staff member gets sick, they can easily book an appointment.</p>
+    </div>
+
+    <div class="row shwd-process">
+      <div class="col-md-4">
+        <div class="media pt-3">
+          <img src="/assets/svg/noun_Mobile_1202520.svg" />
+          <p class="media-body pb-3 mb-0">
+            <strong class="d-block text-gray-dark">1.</strong>
+            Book a mobile appointment
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="media pt-3">
+          <img src="/assets/svg/noun_Prescription_2138877.svg" />
+          <p class="media-body pb-3 mb-0">
+            <strong class="d-block text-gray-dark">2.</strong>
+            Treatment arranged within 24 hours
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="media pt-3">
+          <img src="/assets/svg/noun_Doctor_2207514_000000.svg" />
+          <p class="media-body pb-3 mb-0">
+            <strong class="d-block text-gray-dark">3.</strong>
+            Follow up care after treatment
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="swu">
+    <div class="row">
+      <div class="col-12 col-md-4 swu__title">
+        <h1>Making HR easier<i class="fas fa-circle html-period"></i></h1>
+        <button type="button" class="btn btn-cs">Calculate Savings</button>
+      </div>
+      <div class="col-12 col-md-8 swu__parag">
+        <p>Easy onboarding to DocHQ</p>
+        <p>Sick notes sent direct to you</p>
+        <p>Reduce your administrative costs</p>
+        <p>Your employees can be treated without leaving work</p>
+        <p>Prescription delivered to the workplace</p>
+        <p>Analyse workplace sickness trends</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wdt">
+    <div class="col-12">
+      <h1>A personal service for your wellbeing</h1>
+      <p>We take the time to find a package that suits you. Then we make DocHQ as simple and accessible for management,
+        as it is for your employees..</p>
+    </div>
+
+    <div class="row wdt__process">
+      <div class="col-md-4">
+        <div class="media pt-3">
+          <img src="/assets/svg/noun_Woman_147460.svg" />
+          <p class="media-body pb-3 mb-0">
+            <strong class="d-block text-gray-dark">1.</strong>
+            Meet your DocHQ account manager
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="media pt-3">
+          <img src="/assets/svg/noun_clipboard_452111.svg" />
+          <p class="media-body pb-3 mb-0">
+            <strong class="d-block text-gray-dark">2.</strong>
+            Share employee details for onboarding
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="media pt-3">
+          <img src="/assets/svg/noun_dashboard_1820433.svg" />
+          <p class="media-body pb-3 mb-0">
+            <strong class="d-block text-gray-dark">3.</strong>
+            Analyse workplace trends via dashboard
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row da">
+    <div class="col-md-7">
+      <h1>Download our free DocHQ app</h1>
+      <p>Easily check your symptoms or speak with our medical team whilst in the office, on the shop floor or our in
+        the field.</p>
+      <img src="/assets/temp/images/app-store.png" />
+      <img src="/assets/temp/images/google-app.png" />
+    </div>
+    <div class="col-md-5">
+        <img src="/assets/images/phone_convo.png" />
+    </div>
+  </div>
+
+  <div class="quote-from-container">
+    <app-quote-from></app-quote-from>
+  </div>
+
+  <div class="footer-container">
+    <app-footer></app-footer>
+  </div>
+</div>
+
+<ng-template #headerText>
+  <div class="hdw-header__img-text">
+    <h1>How DocHQ works<i class="fas fa-circle html-period"></i></h1>
+    <p>To give your employees quality and accessible healthcare, we partner with GPs local to you. .</p>
+    <button type="button" [appExternalUrl]="environment.url.SpeakWithUs" class="btn btn-swu">Speak with us</button>
+  </div>
+</ng-template>
